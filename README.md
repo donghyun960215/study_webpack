@@ -328,6 +328,7 @@ module.exports = {
 ```
 ## Nettlify 배포
 ```plaintext
-1. .gitignore 파일 추가
+1. .gitignore 파일 추가한다
    .cache 입력
+
 ```
