@@ -271,5 +271,63 @@ module.exports = {
     "last 2 versions"
   ]
 5. .postcssrc.js 파일 생성 후 구성옵션 삽입
-   
+```
+
+## babel
+```plaintext
+1. npm i -D @babel/core @babel/preset-env @babel/plugin-transform-runtime 
+   를 입력하여 3개의 패키지 다운로드
+2. .babelrc.js 파일 생성
+3. .babelrc.js 파일에 export하기
+   module.exports = {
+  presets: ['@babel/preset-env'],
+  plugins: [
+    ['@babel/plugin-transform-runtime']
+  ]
+}
+4. webpack.config.js 부분에 속성 추가
+5. npm i -D babel-loader 를 입력해서 패키지 다운로드
+```
+```js
+///webpack.config.js 파일///
+//import
+const path = require('path');
+//다운로드 받은 패키지를 import 한다.
+const Htmlplugin = require('html-webpack-plugin');
+const Copyplugin = require('copy-webpack-plugin');
+
+// export
+module.exports = {
+  entry: './js/main.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'main.js',
+    clean: true
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.s?css$/,
+        use: [
+          'style-loader',//해석된 내용을 html부분의 style 태그에 삽입해주는 역활을 한다.
+          'css-loader', //js파일에서 css파일을 해석할 수 있도록 해준다.
+          'postcss-loader',
+          'sass-loader'
+        ]
+      },
+      {
+        test: /\.js$/,
+        use:[
+          'babel-loader'
+        ]
+      }
+    ],
+  },
+}
+```
+## Nettlify 배포
+```plaintext
+1. .gitignore 파일 추가
+   .cache 입력
 ```
