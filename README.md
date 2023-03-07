@@ -16,6 +16,7 @@
 6. 생성 후 구성옵션을 작성해준다
 ```
 ```js
+////webpack.config.js 파일///
 //import
 //require('path'); 전역 모튤을 가지고 와서 path에 할당한다.
 const path = require('path');
@@ -57,6 +58,7 @@ output 같은 경우 path 와 filename을 지정을 안하게 되면
 3. webpack.config.js 파일에서 옵션 추가
 ```
 ```js
+////webpack.config.js 파일///
 //import
 const path = require('path');
 //다운로드 받은 패키지를 import 한다.
@@ -94,6 +96,7 @@ template: './index.html' 은 루트경로에 만들어 놓은 html를 지칭한�
 3. webpack.config.js 파일에서 옵션 추가
 ```
 ```js
+////webpack.config.js 파일///
 //import
 const path = require('path');
 //다운로드 받은 패키지를 import 한다.
@@ -145,6 +148,7 @@ module.exports = {
 ```
 ```js
 ///////방법 3///////
+////webpack.config.js 파일///
 //import
 const path = require('path');
 //다운로드 받은 패키지를 import 한다.
@@ -172,4 +176,97 @@ module.exports = {
     ]
   }
 }
+```
+
+### scss
+```js
+////webpack.config.js 파일///
+//import
+const path = require('path');
+//다운로드 받은 패키지를 import 한다.
+const Htmlplugin = require('html-webpack-plugin');
+const Copyplugin = require('copy-webpack-plugin');
+
+// export
+module.exports = {
+  entry: './js/main.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'main.js',
+    clean: true
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.s?css$/,
+        use: [
+          'style-loader',//해석된 내용을 html부분의 style 태그에 삽입해주는 역활을 한다.
+          'css-loader', //js파일에서 css파일을 해석할 수 있도록 해준다.
+          'sass-loader'
+        ]
+      }
+    ]
+  }
+}
+```
+```plaintext
+기존 module 안에 rules부분에다가 s? 부분을 추가해준다 그렇게되면
+css뿐만이 아니라 scss파일도 찾아서 적용을 해준다.
+그리고 추가적으로 패키지를 다운 받는다.
+npm i -D sass-loader sass 두개의 패키지를 다운 받는다.
+```
+
+## autoprefixer
+```js
+////webpack.config.js 파일///
+//import
+const path = require('path');
+//다운로드 받은 패키지를 import 한다.
+const Htmlplugin = require('html-webpack-plugin');
+const Copyplugin = require('copy-webpack-plugin');
+
+// export
+module.exports = {
+  entry: './js/main.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'main.js',
+    clean: true
+  },
+
+  module: {
+    rules: [
+      {
+        test: /\.s?css$/,
+        use: [
+          'style-loader',//해석된 내용을 html부분의 style 태그에 삽입해주는 역활을 한다.
+          'css-loader', //js파일에서 css파일을 해석할 수 있도록 해준다.
+          'postcss-loader',
+          'sass-loader'
+        ]
+      }
+    ]
+  }
+}
+```
+```js
+///.postcssrc.js 파일///
+module.exports = {
+  plugins: [
+    require('autoprefixer')
+  ]
+}
+```
+```plaintext
+1. npm i -D postcss autoprefixer postcss-loader 를 입력해서 패키지 다운로드
+2. webpack.config.js 파일 수정
+3. 여기서 중요한 점은 rules작성시 sass-loader 보다 먼저 옵션을 추가해준다.
+4. package.json 파일에 옵션을 추가해준다.
+   "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+5. .postcssrc.js 파일 생성 후 구성옵션 삽입
+   
 ```

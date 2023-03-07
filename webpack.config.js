@@ -16,10 +16,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.s?css$/,
         use: [
           'style-loader',//해석된 내용을 html부분의 style 태그에 삽입해주는 역활을 한다.
-          'css-loader' //js파일에서 css파일을 해석할 수 있도록 해준다.
+          'css-loader', //js파일에서 css파일을 해석할 수 있도록 해준다.
+          'postcss-loader',
+          'sass-loader'
         ]
       }
     ]
