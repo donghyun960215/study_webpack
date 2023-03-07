@@ -145,6 +145,8 @@ module.exports = {
 * 방법 3
 1. css 파일을 읽을 수 있는 패키지를 다운로드한다.
 2. npm i -D css-loader style-loader 를 입력하여 두개의 패키지를 다운로드한다.
+3. js 파일에 import 해준다.
+   import '../css/main.css'
 ```
 ```js
 ///////방법 3///////
@@ -211,10 +213,11 @@ module.exports = {
 }
 ```
 ```plaintext
-기존 module 안에 rules부분에다가 s? 부분을 추가해준다 그렇게되면
-css뿐만이 아니라 scss파일도 찾아서 적용을 해준다.
-그리고 추가적으로 패키지를 다운 받는다.
-npm i -D sass-loader sass 두개의 패키지를 다운 받는다.
+1. 기존 module 안에 rules부분에다가 s? 부분을 추가해준다 그렇게되면
+   css뿐만이 아니라 scss파일도 찾아서 적용을 해준다.
+2. 그리고 추가적으로 패키지를 다운 받는다.
+   npm i -D sass-loader sass 두개의 패키지를 다운 받는다.
+3. import '../scss/main.scss'
 ```
 
 ## autoprefixer
